@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="js/detalles_piso.js"></script>
+</head>
+
+<body>
+	<center>
+		<br>
+		<div><img width="140px" src="Iconos/cross.png">
+			<h1>Plus Roja<b></b></h1>
+		</div>
+	</center>
+	<div class="card-panel grey lighten-5 z-depth-1">
+		<h4 class="center" id="nombre">Nombre hogar</h4>
+	</div>
+	<div class="row">
+		<div class="input-field col s12">
+			<input id="aforo" type="number" class="validate rin">
+			<label class="lar" for="aforo">Aforo</label>
+		</div>
+		<!--div class="col s6 input-field inline" id="aforo">Aforo <input id="input-aforo col s6" disabled></div-->
+
+	</div>
+	<div class="row">
+		<div class="input-field col s12">
+			<input id="num_usuarios" type="number" class="validate rin">
+			<label class="lar" for="num_usuarios">Nº de usuarios</label>
+		</div>
+		<!--div class="col s6 input-field inline" id="aforo">Aforo <input id="input-aforo col s6" disabled></div-->
+
+	</div>
+	<div class="row">
+		<div class="input-field col s12">
+			<input id="horario" type="text" class="validate rin">
+			<label class="lar" for="horario">Horario</label>
+		</div>
+		<!--div class="col s6 input-field inline" id="aforo">Aforo <input id="input-aforo col s6" disabled></div-->
+
+	</div>
+	<div class="row">
+		<div class="input-field col s12">
+			<input id="num_voluntarios" type="number" class="validate rin">
+			<label class="lar" for="num_voluntarios">Nº de voluntarios</label>
+		</div>
+		<!--div class="col s6 input-field inline" id="aforo">Aforo <input id="input-aforo col s6" disabled></div-->
+
+	</div>
+	<div class="row margen">
+		<img class="responsive-img col s5 offset-s1" id="cocina" src="iconos/cocina_off.png" alt="Cocina">
+		<img class="responsive-img col s5" id="comida" src="iconos/comida_off.png" alt="Comida">
+	</div>
+	<div class="row margen">
+		<img class="responsive-img col s5 offset-s1" id="ducha" src="iconos/ducha_off.png" alt="Ducha">
+		<img class="responsive-img col s5" id="lavadora" src="iconos/lavadora_off.png" alt="Lavadora">
+	</div>
+	<div class="row margen">
+		<img class="responsive-img col s5 offset-s1" id="plancha" src="iconos/plancha_off.png" alt="Plancha">
+		<img class="responsive-img col s5" id="movilidad" src="iconos/movilidad_off.png" alt="Movilidad">
+	</div>
+	<center>
+		<button class="row oculto waves-effect waves-light btn" id="boton" onclick="updateData()">Actualizar
+			datos</button>
+	</center>
+</body>
+
+</html>

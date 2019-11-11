@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="js/mapa_ciudad.js"></script>
+</head>
+
+<body>
+	<center>
+		<br>
+		<div><img width="70px" src="Iconos/cross.png">
+			<h4>Plus Roja<b></b></h4>
+		</div>
+	</center>
+	<select class="browser-default" id="lista_ciudades">
+		<option value="" disabled selected>Selecciona ciudad</option>
+	</select>
+
+	<div id="map" style="height: 500px;"></div>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPSHcS_xzbFeu36FX9EOZ45cf9Y-oVfvM&callback=initMap"
+		async defer></script>
+</body>
+
+</html>
