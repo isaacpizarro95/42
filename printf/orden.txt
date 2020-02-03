@@ -1,0 +1,7 @@
+1. Primero hacer la conversión de void(arg) al tipo de dato que se requiera.
+Después de esto tenemos que atacar los flags con cierto orden:
+2. Cogemos el número.
+3. if precision -> add zeros si es necesario
+4. if zeros -> add zeros
+5. add sign
+6. add spaces (width)
