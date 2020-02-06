@@ -3,40 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   todo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 16:53:18 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/06 18:24:48 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/06 22:15:19 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_struct	*ft_hyphen(char *chain, t_struct *list)
+char		*ft_hyphen(char *chain, char *new_chain, t_struct *list)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < ft_strlen(chain))
 	{
-		ft_putchar(chain[i]);
+		new_chain[i] = chain[i];
 		i++;
 	}
 	while (i < (size_t)list->width)
 	{
-		ft_putchar(' ');
+		new_chain[i] = ' ';
 		i++;
 	}
-	return (list);
+	return (new_chain);
 }
 
-char	*ft_put_precision(char *str, t_struct *list)
+char		*ft_zeros(char *str, char *new_str, t_struct *list)
 {
-	long int	i;
-	char		*new_str;
+	long int i;
 
 	i = 0;
-	new_str = (char*)malloc(sizeof(char));
+	if (ft_iscontained('.', list->set))
+		return (str);
+	else	
+	{
+		while (i < list->width - (long int)ft_strlen(str))
+		{
+			new_str[i] = '0';
+			i++;
+		}
+		while (i < list->width)
+		{
+			new_str[i] = str[i];
+			i++;
+		}
+		return (new_str);
+	}
+}
+
+char		*ft_put_precision(char *str, char *new_str, t_struct *list)
+{
+	long int	i;
+
+	i = 0;
 	while (i < list->precision)
 	{
 		new_str[i] = str[i];
@@ -44,51 +65,75 @@ char	*ft_put_precision(char *str, t_struct *list)
 	}
 	new_str[i] = '\0';
 	return (new_str);
-	free(new_str);
 }
 
-char		*aux_zeros(char *str, size_t size)
+char		*ft_put_witdh(char *str, char *new_str, t_struct *list)
 {
-	size_t	i;
-	size_t	j;
-	char	*new_char;
+	long int 	i;
+	long int	j;
+	char		*new_chain;
 
-	i = 0;
-	j = 0;
-	new_char = NULL;
-	if (size <= ft_strlen(str))
-		return (str);
-	else
+	if (list->zero != '\0' && list->width > (long int)ft_strlen(str))
 	{
-		while (i < size - ft_strlen(str))
-		{
-			new_char[i] = '0';
-			i++;
-		}
-		while (str)
-		{
-			new_char[i] = str[j];
-			i++;
-			j++;
-		}
-		return (new_char);
+		new_chain = (char*)malloc(sizeof(char));
+		new_str = ft_zeros(str, new_chain, list);
+		free(new_chain);
 	}
-}
-
-char		*ft_zeros(char *str, t_struct *list)
-{
-	size_t	size;
-
-	if (list->asterisk)
-		size = list->asterisk;
 	else
 	{
-		if (list->precision)
-			size = list->precision;
+		if (ft_iscontained('-', list->set))
+		{
+			new_chain = (char*)malloc(sizeof(char));
+			new_str = ft_hyphen(str, new_chain, list);
+			free(new_chain);
+		}
 		else
-			size = list->width;
+		{
+			i = 0;
+			j = 0;
+			while (i < (list->width - (long int)ft_strlen(str)))
+			{
+				new_str[i] = ' ';
+				i++;
+			}
+			while (i < list->width)
+			{
+				new_str[i] = str[j];
+				i++;
+				j++;
+			}
+		}
 	}
-	return (aux_zeros(str, size));
+	list->len += list->width;
+	return (new_str);
+}
+
+t_struct	*ft_d_conversion(t_struct *list)
+{
+	long int	i;
+	long int	j;
+	char		*str;
+	char		*new_str;
+
+	str = ft_itoa(va_arg(list->args, int));
+	if (list->width > (long int)ft_strlen(str))
+	{
+		new_str = (char*)malloc(sizeof(char));
+		str = ft_put_witdh(str, new_str, list);
+		free(new_str);
+	}
+	if (ft_iscontained('.', list->set) && list->precision < (long int)ft_strlen(str))
+	{
+		new_str = (char*)malloc(sizeof(char));
+		str = ft_put_precision(str, new_str, list);
+		free(new_str);
+	}
+	else
+	{
+		ft_putstr(str);
+		list->len += ft_strlen(str);
+	}
+	return (list);
 }
 
 t_struct	*ft_s_conversion(t_struct *list)
@@ -96,31 +141,21 @@ t_struct	*ft_s_conversion(t_struct *list)
 	long int	i;
 	long int	j;
 	char		*str;
+	char		*new_str;
 
 	str = va_arg(list->args, char*);
-	if (list->precision < (long int)ft_strlen(str))
-		str = ft_put_precision(str, list);
+	if (ft_iscontained('.', list->set) && list->precision < (long int)ft_strlen(str))
+	{
+		new_str = (char*)malloc(sizeof(char));
+		str = ft_put_precision(str, new_str, list);
+		free(new_str);
+	}
 	if (list->width > (long int)ft_strlen(str))
 	{
-		if (ft_iscontained('-', list->set))
-			ft_hyphen(str, list);
-		else
-		{
-			i = 0;
-			j = 0;
-			while (i < (list->width - (long int)ft_strlen(str)))
-			{
-				ft_putchar(' ');
-				i++;
-			}
-			while (i < list->width)
-			{
-				ft_putchar(str[j]);
-				i++;
-				j++;
-			}
-		}
-		list->len += list->width;
+		new_str = (char*)malloc(sizeof(char));
+		str = ft_put_witdh(str, new_str, list);
+		ft_putstr(str);
+		free(new_str);
 	}
 	else
 	{
@@ -134,24 +169,17 @@ t_struct	*ft_c_conversion(t_struct *list)
 {
 	long int	i;
 	char		*str;
+	char		*new_str;
 
-	str = (char*)malloc(sizeof(char));
 	i = 0;
+	str = (char*)malloc(sizeof(char));
 	*str = va_arg(list->args, int);
 	if (list->width > 1)
 	{
-		if (ft_iscontained('-', list->set))
-			ft_hyphen(str, list);
-		else
-		{
-			while (i < list->width - 1)
-			{
-				ft_putchar(' ');
-				i++;
-			}
-			ft_putchar(*str);
-		}
-		list->len += list->width;
+		new_str = (char*)malloc(sizeof(char));
+		str = ft_put_witdh(str, new_str, list);
+		ft_putstr(str);
+		free(new_str);
 	}
 	else
 	{
@@ -168,6 +196,8 @@ t_struct	*ft_conversion(t_struct *list)
 		ft_c_conversion(list);
 	if (list->conversion == 's')
 		ft_s_conversion(list);
+	if (list->conversion == 'd')
+		ft_d_conversion(list);
 	return (list);
 }
 
@@ -305,12 +335,12 @@ int			ft_printf(const char *format, ...)
 	len_outpt = parser(list);
 	va_end(list->args);
 	free(list);
-	printf("\n%d", len_outpt);
+	printf("\n%d\n", len_outpt);
 	return (len_outpt);
 }
 
 int			main(void)
 {
-	ft_printf("hola pedazo de %8.0s hombres", "buenos");
+	ft_printf("hola pedazo de %-8d hombres", 12345);
 	return (0);
 }

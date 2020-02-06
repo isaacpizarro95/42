@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_precision_widht.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 22:49:44 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/04 17:31:54 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:55:05 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
