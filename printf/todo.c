@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 16:53:18 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/07 03:16:45 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/07 17:03:44 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,32 @@ char		*ft_zeros(char *str, char *new_str, t_struct *list)
 	}
 }
 
-char		*ft_put_precision(char *str, char *new_str, t_struct *list)
+char		*ft_put_precision_integers(char *str, char *new_str, t_struct *list)
+{
+	long int	i;
+	long int	j;
+
+	i = 0;
+	j = 0;
+	if (ft_iscontained('.', list->set) && list->precision > (long int)ft_strlen(str))
+	{
+		while (i < list->precision - (long int)ft_strlen(str))
+		{
+			new_str[i] = '0';
+			i++;
+		}
+		while (i < list->precision)
+		{
+			new_str[i] = str[j];
+			i++;
+			j++;
+		}
+		return (new_str);
+	}
+	return (str);
+}
+
+char		*ft_put_precision_chars(char *str, char *new_str, t_struct *list)
 {
 	long int	i;
 
@@ -109,22 +134,59 @@ char		*ft_put_witdh(char *str, char *new_str, t_struct *list)
 t_struct	*ft_d_conversion(t_struct *list)
 {
 	long int	i;
-	long int	j;
 	char		*str;
 	char		*new_str;
 
+	i = 0;
 	str = ft_itoa(va_arg(list->args, int));
-	new_str = (char*)malloc(sizeof(char));
-	if (list->width > (long int)ft_strlen(str))	
-		str = ft_put_witdh(str, new_str, list);
-	if (ft_iscontained('.', list->set) && list->precision < (long int)ft_strlen(str))
-		str = ft_put_precision(str, new_str, list);
-	else
+	if (list->precision > list->width && list->precision > (long int)ft_strlen(str))
 	{
+		new_str = (char*)malloc(sizeof(char));
+		str = ft_put_precision_integers(str, new_str, list);
 		ft_putstr(str);
-		list->len += ft_strlen(str);
+		list->len += list->precision;
+		free(new_str);
 	}
-	free(new_str);
+	else 
+	{
+		if (list->width > (long int)ft_strlen(str))	
+		{
+			if (list->precision > (long int)ft_strlen(str))
+			{
+				new_str = (char*)malloc(sizeof(char));
+				str = ft_put_precision_integers(str, new_str, list);
+				free(new_str);
+				if (ft_iscontained('-', list->set))
+				{
+					new_str = (char*)malloc(sizeof(char));
+					str = ft_hyphen(str, new_str, list);
+					free(new_str);
+				}
+				else
+				{
+					while (i < list->width - list->precision)
+					{
+						ft_putchar(' ');
+						i++;
+					}
+				}
+				ft_putstr(str);
+				list->len += list->width;
+			}
+			else
+			{
+				new_str = (char*)malloc(sizeof(char));
+				str = ft_put_witdh(str, new_str, list);
+				ft_putstr(str);
+				free(new_str);
+			}
+		}
+		else
+		{
+			ft_putstr(str);
+			list->len += ft_strlen(str);
+		}
+	}
 	return (list);
 }
 
@@ -138,7 +200,7 @@ t_struct	*ft_s_conversion(t_struct *list)
 	list->zero = '\0';
 	str = va_arg(list->args, char*);
 	new_str = (char*)malloc(sizeof(char));
-	str = ft_put_precision(str, new_str, list);
+	str = ft_put_precision_chars(str, new_str, list);
 	new_str = NULL;
 	free(new_str);
 	if (list->width > (long int)ft_strlen(str))
@@ -210,9 +272,11 @@ char		*get_number(t_struct *list, int i, char *nbr)
 t_struct	*ft_width(t_struct *list)
 {
 	int		i;
+	int		j;
 	char	*nbr;
 
 	i = 0;
+	j = 0;
 	if (ft_iscontained('*', list->set))
 		list->width = list->asterisk;
 	else
@@ -229,14 +293,19 @@ t_struct	*ft_width(t_struct *list)
 			i++;
 		}
 		nbr = (char*)malloc(sizeof(char));
-		nbr = get_number(list, i, nbr);
-		if (nbr == NULL)
-			return (list);
-		else
-			list->width = ft_atoi(nbr);
+		get_number(list, i, nbr);
+		if (nbr)
+			list->width = (long int)ft_atoi(nbr);
 		nbr = NULL;
 		free(nbr);
 	}
+	return (list);
+}
+
+t_struct	*ft_asterisk(t_struct *list)
+{
+	if (ft_iscontained('*', list->set))
+		list->asterisk = va_arg(list->args, long int);
 	return (list);
 }
 
@@ -252,7 +321,7 @@ t_struct	*ft_precision(t_struct *list)
 			i++;
 		i++;
 		nbr = (char*)malloc(sizeof(char));
-		nbr = get_number(list, i, nbr);
+		get_number(list, i, nbr);
 		if (nbr == NULL)
 			list->precision = 0;
 		else
@@ -260,14 +329,13 @@ t_struct	*ft_precision(t_struct *list)
 		nbr = NULL;
 		free(nbr);
 	}
-	if (ft_iscontained('*', list->set))
-		list->asterisk = va_arg(list->args, long int);
 	return (list);
 }
 
 void		ft_start(t_struct *list)
 {
 	ft_precision(list);
+	ft_asterisk(list);
 	ft_width(list);
 	ft_conversion(list);
 }
@@ -335,6 +403,6 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	ft_printf("hola pedazo de %8c hombres", '1');
+	ft_printf("hola pedazo de %7.6d hombres", 12345);
 	return (0);
 }
