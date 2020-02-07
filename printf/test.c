@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 20:44:26 by isaacpizarr       #+#    #+#             */
-/*   Updated: 2020/02/06 22:15:09 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/07 03:07:54 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int     main(void)
 {
-    printf("\n%06.4d\n", 12345);
+    printf("\n%06.4c\n", '1');
     return (0);
 }
