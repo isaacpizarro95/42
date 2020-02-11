@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 16:53:18 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/07 17:03:44 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/10 22:59:14 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,12 @@ char		*ft_put_witdh(char *str, char *new_str, t_struct *list)
 	char		*new_chain;
 
 	new_chain = (char*)malloc(sizeof(char));
-	if (list->zero != '\0' && list->width > (long int)ft_strlen(str))
-		new_str = ft_zeros(str, new_chain, list);
+	if (ft_iscontained('-', list->set))
+		new_str = ft_hyphen(str, new_chain, list);
 	else
 	{
-		if (ft_iscontained('-', list->set))
-			new_str = ft_hyphen(str, new_chain, list);
+		if (list->zero != '\0' && list->width > (long int)ft_strlen(str))
+			new_str = ft_zeros(str, new_chain, list);
 		else
 		{
 			i = 0;
@@ -403,6 +403,6 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	ft_printf("hola pedazo de %7.6d hombres", 12345);
+	ft_printf("hola pedazo de %-07d hombres", 12345);
 	return (0);
 }
