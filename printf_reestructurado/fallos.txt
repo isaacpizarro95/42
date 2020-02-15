@@ -1,0 +1,4 @@
+- Arreglar el problema del número.
+- Dividir funciones de más de 25 líneas.
+- Arreglar el tema del signo (no se escribe bien cuando se ponen ceros ya sea por el ancho o por la precisión).
+- En la conversión 'd' no utilizo correctamente el flag '0'.

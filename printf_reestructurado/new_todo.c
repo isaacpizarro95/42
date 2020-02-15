@@ -3,14 +3,132 @@
 /*                                                        :::      ::::::::   */
 /*   new_todo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:38:33 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/13 17:26:54 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/15 20:05:06 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char		*ft_put_precision_chars(char *str, t_struct *list)
+{
+	long int	i;
+
+	i = 0;
+	if (ft_iscontained('.', list->set) && list->precision < (long int)ft_strlen(str))
+	{
+		if (list->precision == 0)
+			list->aux[i] = '\0';
+		while (i < list->precision)
+		{
+			list->aux[i] = str[i];
+			i++;
+		}
+		return (list->aux);
+	}
+	return (str);
+}
+/**
+char		*ft_put_witdh(char *str, t_struct *list)
+{
+	long int 	i;
+	char		*new_str;
+
+	if (ft_iscontained('-', list->set))
+	{
+		new_str = (char*)malloc(sizeof(char));
+		list->aux = ft_hyphen(str, new_str, list);
+		free(new_str);
+		
+		if (list->conversion == 'd' || list->conversion == 'i')
+		{
+			new_str = (char*)malloc(sizeof(char));
+			list->aux = ft_sign(list->aux, new_str, list);
+			free(new_str);
+		}
+		
+	}
+	else
+	{
+		if (list->zero != '\0' && list->width > (long int)ft_strlen(str))
+		{
+			new_str = (char*)malloc(sizeof(char));
+			list->aux = ft_zeros(str, new_str, list);
+			free(new_str);
+			if (list->conversion == 'd' || list->conversion == 'i')
+			{
+				new_str = (char*)malloc(sizeof(char));
+				list->aux = ft_sign(list->aux, new_str, list);
+				free(new_str);
+			}
+			
+		}
+		else
+		{
+			i = 0;
+			new_str = (char*)malloc(sizeof(char));
+			if (list->conversion == 'd' || list->conversion == 'i')
+				list->aux = ft_sign(str, new_str, list);
+			free(new_str);
+			while (i < list->width - (long int)ft_strlen(str))
+			{
+				list->aux[i] = ' ';
+				i++;
+			}
+			while (i < list->width)
+			{
+				list->aux[i] = *str;
+				str++;
+				i++;
+			}
+		}
+	}
+	list->len += list->width;
+	return (list->aux);
+}
+**/
+t_struct	*ft_s_conversion(t_struct *list)
+{
+	long int	i;
+	long int	j;
+	char		*str;
+
+	list->zero = '\0';
+	str = va_arg(list->args, char*);
+	if (ft_iscontained('.', list->set))
+		str = ft_put_precision_chars(str, list);
+	if (list->width > (long int)ft_strlen(str))
+	{
+		i = (long int)ft_strlen(str);
+		if (ft_iscontained('-', list->set))
+		{
+			ft_putstr(str);
+			while (i <= list->width)
+			{
+				ft_putchar(' ');
+				i++;
+			}
+		}
+		else
+		{
+			while (i <= list->width)
+			{
+				ft_putchar(' ');
+				i++;
+			}
+			ft_putstr(str);
+		}
+		list->len += list->width;
+	}
+	else
+	{
+		ft_putstr(str);
+		list->len += ft_strlen(str);
+	}
+	return (list);
+}
 
 t_struct	*ft_c_conversion(t_struct *list)
 {
@@ -54,9 +172,9 @@ t_struct	*ft_conversion(t_struct *list)
 {
 	if (list->conversion == 'c')
 		ft_c_conversion(list);
-	/**if (list->conversion == 's')
+	if (list->conversion == 's')
 		ft_s_conversion(list);
-	if (list->conversion == 'd' || list->conversion == 'i')
+	/**if (list->conversion == 'd' || list->conversion == 'i')
 		ft_d_conversion(list);**/
 	return (list);
 }
@@ -84,6 +202,7 @@ t_struct	*ft_width(t_struct *list)
 			list->zero = list->set[i];
 			i++;
 		}
+		nbr = (char*)malloc(sizeof(char));
 		while (ft_isdigit(list->set[i]))
 		{
 			nbr[j] = list->set[i];
@@ -112,6 +231,7 @@ t_struct	*ft_precision(t_struct *list)
 		while (list->set[i] != '.')
 			i++;
 		i++;
+		nbr = (char*)malloc(sizeof(char));
 		while (ft_isdigit(list->set[i]))
 		{
 			nbr[j] = list->set[i];
@@ -183,24 +303,26 @@ t_struct	*real_parser(t_struct *list)
 {
 	while (list->format[list->i] != '\0')
 	{
-		if (list->format[list->i] == '%' && list->format[list->i + 1] == '%')
-		{
-			ft_putchar(list->format[list->i]);
-			list->i = list->i + 2;
-			list->len++;
-		}
 		if (list->format[list->i] == '%')
 		{
-			list->i++;
-			update_set(list);
-			ft_start(list);
+			if (list->format[list->i] == '%' && list->format[list->i + 1] == '%')
+			{
+				ft_putchar(list->format[list->i]);
+				list->i = list->i + 2;
+				list->len++;
+			}
+			else
+			{
+				list->i++;
+				list->set = (char*)malloc(sizeof(char));
+				update_set(list);
+				ft_start(list);
+				free(list->set);
+			}
 		}
-		else
-		{
-			ft_putchar(list->format[list->i]);
-			list->i++;
-			list->len++;
-		}
+		ft_putchar(list->format[list->i]);
+		list->i++;
+		list->len++;
 	}
 	return (list);
 }
@@ -235,7 +357,7 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	ft_printf("son %c cosas", '7');
+	ft_printf("son %-*.*s cosas", 8, 2, "12345");
 	//getchar();
 	return (0);
 }

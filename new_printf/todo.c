@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   todo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 16:53:18 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/12 18:44:35 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/15 19:56:46 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -491,6 +491,6 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	ft_printf("son %-8.6d cosas", 12345);
+	ft_printf("son %-88.6d cosas", 12345);
 	return (0);
 }
