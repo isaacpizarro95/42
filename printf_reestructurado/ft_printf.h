@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:39:05 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/15 20:05:11 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/16 04:57:38 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ typedef struct	s_struct
 {
 	const char	*format;
 	char		*set;
-	char		*aux;
+	char		*str;
 	char		conversion;
 	va_list		args;
-	long int	nbr;
 	long int	precision;
 	long int	width;
 	long int	asterisk_width;
@@ -43,11 +42,12 @@ t_struct	*ft_precision(t_struct *list);
 t_struct	*ft_asterisk(t_struct *list);
 t_struct	*ft_width(t_struct *list);
 char		*get_number(t_struct *list, int i, char *nbr);
-char		*ft_put_precision_chars(char *str, t_struct *list);
-char		*ft_put_precision_integers(char *str, t_struct *list);
-char		*ft_put_witdh(char *str, t_struct *list);
-char		*ft_hyphen(char *str, char *new_str, t_struct *list);
-char		*ft_zeros(char *str, char *new_str, t_struct *list);
+char		*ft_put_precision_chars(t_struct *list);
+t_struct	*ft_put_precision_integers(t_struct *list);
+t_struct	*ft_put_witdh(t_struct *list);
+t_struct	*ft_hyphen(t_struct *list);
+t_struct	*ft_spaces(t_struct *list);
+t_struct	*ft_zeros(t_struct *list);
 char		*ft_sign(char *str, char *new_str, t_struct *list);
 t_struct	*ft_conversion(t_struct *list);
 t_struct	*ft_c_conversion(t_struct *list);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 00:25:29 by isaacpizarr       #+#    #+#             */
-/*   Updated: 2020/02/16 04:57:30 by isaacpizarr      ###   ########.fr       */
+/*   Created: 2020/02/16 04:50:20 by isaacpizarr       #+#    #+#             */
+/*   Updated: 2020/02/16 04:57:32 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int     main(void)
 {
-    printf("son %-8 cosas\n", 12345);
+    printf("son %08c cosas\n", '2');
     return (0);
 }

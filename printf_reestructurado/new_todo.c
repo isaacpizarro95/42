@@ -6,163 +6,169 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:38:33 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/15 20:05:06 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/16 04:57:18 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*ft_put_precision_chars(char *str, t_struct *list)
+t_struct	*ft_zeros(t_struct *list)
 {
-	long int	i;
+	long int i;
 
-	i = 0;
-	if (ft_iscontained('.', list->set) && list->precision < (long int)ft_strlen(str))
+	i = (long int)ft_strlen(list->str);
+	while (i < list->width)
 	{
-		if (list->precision == 0)
-			list->aux[i] = '\0';
-		while (i < list->precision)
-		{
-			list->aux[i] = str[i];
-			i++;
-		}
-		return (list->aux);
+		ft_putchar('0');
+		i++;
 	}
-	return (str);
+	ft_putstr(list->str);
+	return (list);
 }
-/**
-char		*ft_put_witdh(char *str, t_struct *list)
-{
-	long int 	i;
-	char		*new_str;
 
+t_struct	*ft_spaces(t_struct *list)
+{
+	long int i;
+
+	i = (long int)ft_strlen(list->str);
+	while (i <= list->width)
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putstr(list->str);
+	return (list);
+}
+
+t_struct	*ft_hyphen(t_struct *list)
+{
+	long int i;
+
+	i = (long int)ft_strlen(list->str);
+	ft_putstr(list->str);
+	while (i <= list->width)
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	return (list);
+}
+
+t_struct	*ft_put_witdh(t_struct *list)
+{
 	if (ft_iscontained('-', list->set))
-	{
-		new_str = (char*)malloc(sizeof(char));
-		list->aux = ft_hyphen(str, new_str, list);
-		free(new_str);
-		
-		if (list->conversion == 'd' || list->conversion == 'i')
-		{
-			new_str = (char*)malloc(sizeof(char));
-			list->aux = ft_sign(list->aux, new_str, list);
-			free(new_str);
-		}
-		
-	}
+		ft_hyphen(list);
+	else if (list->zero == '0' && !(ft_iscontained('.', list->set)))
+		ft_zeros(list);
 	else
-	{
-		if (list->zero != '\0' && list->width > (long int)ft_strlen(str))
-		{
-			new_str = (char*)malloc(sizeof(char));
-			list->aux = ft_zeros(str, new_str, list);
-			free(new_str);
-			if (list->conversion == 'd' || list->conversion == 'i')
-			{
-				new_str = (char*)malloc(sizeof(char));
-				list->aux = ft_sign(list->aux, new_str, list);
-				free(new_str);
-			}
-			
-		}
-		else
-		{
-			i = 0;
-			new_str = (char*)malloc(sizeof(char));
-			if (list->conversion == 'd' || list->conversion == 'i')
-				list->aux = ft_sign(str, new_str, list);
-			free(new_str);
-			while (i < list->width - (long int)ft_strlen(str))
-			{
-				list->aux[i] = ' ';
-				i++;
-			}
-			while (i < list->width)
-			{
-				list->aux[i] = *str;
-				str++;
-				i++;
-			}
-		}
-	}
+		ft_spaces(list);
 	list->len += list->width;
-	return (list->aux);
+	return (list);
 }
-**/
-t_struct	*ft_s_conversion(t_struct *list)
+
+t_struct	*ft_put_precision_integers(t_struct *list)
 {
 	long int	i;
 	long int	j;
+	long int	k;
 	char		*str;
 
-	list->zero = '\0';
-	str = va_arg(list->args, char*);
-	if (ft_iscontained('.', list->set))
-		str = ft_put_precision_chars(str, list);
-	if (list->width > (long int)ft_strlen(str))
+	i = (long int)ft_strlen(list->str);
+	j = 0;
+	k = 0;
+	if (list->width > list->precision)
 	{
-		i = (long int)ft_strlen(str);
-		if (ft_iscontained('-', list->set))
+		while (j < list->width - i)
 		{
-			ft_putstr(str);
-			while (i <= list->width)
-			{
-				ft_putchar(' ');
-				i++;
-			}
+			str[j] = '0';
+			j++;
 		}
-		else
+		while (j < list->width)
 		{
-			while (i <= list->width)
-			{
-				ft_putchar(' ');
-				i++;
-			}
-			ft_putstr(str);
+			str[j] = list->str[k];
+			j++;
+			k++;
 		}
+		list->str = str;
+		ft_put_witdh(list);
 		list->len += list->width;
 	}
 	else
 	{
-		ft_putstr(str);
-		list->len += ft_strlen(str);
+		while (j < list->precision - i)
+		{
+			ft_putchar('0');
+			j++;
+		}
+		ft_putstr(list->str);
+		list->len += list->precision;
+	}
+	return (list);
+}
+
+char		*ft_put_precision_chars(t_struct *list)
+{
+	long int	i;
+	char		*temp;
+
+	i = 0;
+	if (list->precision < (long int)ft_strlen(list->str))
+	{
+		if (list->precision == 0)
+			list->str = NULL;
+		else
+		{
+			while (i < list->precision)
+			{
+				temp[i] = list->str[i];
+				i++;
+			}
+			return (temp);
+		}
+	}
+	return (list->str);
+}
+
+t_struct	*ft_d_conversion(t_struct *list)
+{
+	list->str = ft_itoa(va_arg(list->args, long int));
+	if (list->precision > (long int)ft_strlen(list->str))
+		ft_put_precision_integers(list);
+	else if (list->width > (long int)ft_strlen(list->str))
+		ft_put_witdh(list);
+	else
+	{
+		ft_putstr(list->str);
+		list->len += ft_strlen(list->str);
+	}
+	return (list);
+}
+
+t_struct	*ft_s_conversion(t_struct *list)
+{
+	list->zero = '\0';
+	list->str = va_arg(list->args, char*);
+	if (ft_iscontained('.', list->set))
+		list->str = ft_put_precision_chars(list);
+	if (list->width > (long int)ft_strlen(list->str))
+		ft_put_witdh(list);
+	else
+	{
+		ft_putstr(list->str);
+		list->len += ft_strlen(list->str);
 	}
 	return (list);
 }
 
 t_struct	*ft_c_conversion(t_struct *list)
 {
-	char	c;
-	int		i;
-
-	i = 0;
-	c = va_arg(list->args, int);
+	list->zero = '\0';
+	*list->str = va_arg(list->args, int);
 	if (list->width > 1)
-	{
-		if (ft_iscontained('-', list->set))
-		{
-			ft_putchar(c);
-			while (i < list->width)
-			{
-				ft_putchar(' ');
-				i++;
-			}
-			list->len += list->width;
-		}
-		else
-		{
-			while (i < list->width)
-			{
-				ft_putchar(' ');
-				i++;
-			}
-			ft_putchar(c);
-			list->len += list->width;
-		}
-	}
+		ft_put_witdh(list);
 	else
 	{
-		ft_putchar(c);
+		ft_putstr(list->str);
 		list->len++;
 	}
 	return (list);
@@ -170,12 +176,14 @@ t_struct	*ft_c_conversion(t_struct *list)
 
 t_struct	*ft_conversion(t_struct *list)
 {
+	list->str = (char*)malloc(sizeof(char));
 	if (list->conversion == 'c')
 		ft_c_conversion(list);
 	if (list->conversion == 's')
 		ft_s_conversion(list);
-	/**if (list->conversion == 'd' || list->conversion == 'i')
-		ft_d_conversion(list);**/
+	if (list->conversion == 'd' || list->conversion == 'i')
+		ft_d_conversion(list);
+	free(list->str);
 	return (list);
 }
 
@@ -357,7 +365,7 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	ft_printf("son %-*.*s cosas", 8, 2, "12345");
+	ft_printf("son %s cosas", 12345);
 	//getchar();
 	return (0);
 }
