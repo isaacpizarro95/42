@@ -6,11 +6,75 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:38:33 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/16 15:11:38 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/17 00:32:53 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+char		*ft_aux_hexadecimal(int k, char *str, t_struct *list)
+{
+	int		i;
+	int		j;
+	char	*hexadecimal;
+
+	j = 0;
+	if (list->conversion == 'x')
+		hexadecimal = "0123456789abcdef";
+	else
+		hexadecimal = "0123456789ABCDEF";
+	while (k >= 16)
+	{
+		i = k % 16;
+		str[j] = hexadecimal[i];
+		k = k / 16;
+		j++;
+	}
+	str[j] = hexadecimal[k];
+	return (str);
+}
+
+t_struct	*ft_base_hexadecimal(int k, t_struct *list)
+{
+	int		j;
+	char	*str;
+	char	*aux;
+
+	str = (char*)malloc(sizeof(char));
+	aux = (char*)malloc(sizeof(char));
+	j = 0;
+	ft_aux_hexadecimal(k, str, list);
+	while (j < ft_strlen(str))
+	{
+		aux[j] = str[ft_strlen(str) - 1 - j];
+		j++;
+	}
+	list->str = aux;
+	free(str);
+	free(aux);
+	return (list);
+}
+
+t_struct	*ft_sign(t_struct *list)
+{
+	char	*str;
+	int		i;
+
+	str = (char*)malloc(sizeof(char));
+	if (ft_iscontained('-', list->str))
+	{
+		list->sign = 1;
+		while (list->str[i + 1] != '\0')
+		{
+			str[i] = list->str[i + 1];
+			i++;
+		}
+		list->str = str;
+		return(list);
+	}
+	free(str);
+	return(list);
+}
 
 t_struct	*ft_zeros(t_struct *list)
 {
@@ -66,7 +130,7 @@ t_struct	*ft_put_witdh(t_struct *list)
 	return (list);
 }
 
-t_struct	*ft_aux_precision_integers(long int i, t_struct *list)
+t_struct	*ft_aux_put_precision_integers(long int i, t_struct *list)
 {
 	char		*str;
 	long int	j;
@@ -81,7 +145,7 @@ t_struct	*ft_aux_precision_integers(long int i, t_struct *list)
 		j++;
 		i++;
 	}
-	while (list->str[k] != '\0')
+	while (list->str[k])
 	{
 		str[j] = list->str[k];
 		j++;
@@ -102,7 +166,7 @@ t_struct	*ft_put_precision_integers(t_struct *list)
 	i = (long int)ft_strlen(list->str);
 	j = 0;
 	if (list->width > list->precision)
-		ft_aux_precision_integers(i, list);
+		ft_aux_put_precision_integers(i, list);
 	else
 	{
 		while (j < list->precision - i)
@@ -134,9 +198,34 @@ char		*ft_put_precision_chars(char *new_str, t_struct *list)
 	return (new_str);
 }
 
-t_struct	*ft_d_conversion(t_struct *list)
+t_struct	*ft_p_conversion(t_struct *list)
 {
-	list->str = ft_itoa(va_arg(list->args, long int));
+	list->zero = '\0';
+	list->str = (char*)va_arg(list->args, void*);
+	if (list->width > (long int)ft_strlen(list->str))
+		ft_put_witdh(list);
+	else
+	{
+		ft_putstr(list->str);
+		list->len += (long int)ft_strlen(list->str);
+	}
+	return (list);
+}
+
+t_struct	*ft_int_conversion(t_struct *list)
+{
+	unsigned int i;
+
+	if (list->conversion == 'u')
+		list->str = ft_itoa(va_arg(list->args, long unsigned int));
+	else if (list->conversion == 'x' || list->conversion == 'X')
+	{
+		i = va_arg(list->args, unsigned long int);
+		ft_base_hexadecimal(i, list);
+	}
+	else
+		list->str = ft_itoa(va_arg(list->args, long int));
+	ft_sign(list);
 	if (list->precision > (long int)ft_strlen(list->str))
 		ft_put_precision_integers(list);
 	else if (list->width > (long int)ft_strlen(list->str))
@@ -198,79 +287,94 @@ t_struct	*ft_conversion(t_struct *list)
 	list->str = (char*)malloc(sizeof(char));
 	if (list->conversion == 'c')
 		ft_c_conversion(list);
-	if (list->conversion == 's')
+	else if (list->conversion == 's')
 		ft_s_conversion(list);
-	if (list->conversion == 'd' || list->conversion == 'i')
-		ft_d_conversion(list);
+	else if (list->conversion == 'd' || list->conversion == 'i')
+		ft_int_conversion(list);
+	else if (list->conversion == 'u')
+		ft_int_conversion(list);
+	else if (list->conversion == 'x' || list->conversion == 'X')
+		ft_int_conversion(list);
+	else if (list->conversion == 'p')
+		ft_p_conversion(list);
 	//free(list->str);
 	return (list);
 }
 
+t_struct	*ft_aux_widht(int i, int j, t_struct *list)
+{
+	char	*nbr;
+
+	while (list->set[i] != '\0')
+	{
+		if (list->set[i] == '.' || ft_isdigit(list->set[i]) == 1)
+			break ;
+		i++;
+	}
+	if (list->set[i] == '0')
+	{
+		list->zero = list->set[i];
+		i++;
+	}
+	nbr = (char*)malloc(sizeof(char));
+	while (ft_isdigit(list->set[i]))
+	{
+		nbr[j] = list->set[i];
+		i++;
+		j++;
+	}
+	if (nbr)
+		list->width = (long int)ft_atoi(nbr);
+	free(nbr);
+	return(list);
+}
+
 t_struct	*ft_width(t_struct *list)
 {
-	int			i;
-	int			j;
-	char		*nbr;
+	int i;
+	int j;
 
 	i = 0;
 	j = 0;
 	if (ft_iscontained('*', list->set))
 		list->width = list->asterisk_width;
 	else
+		ft_aux_widht(i, j, list);
+	return (list);
+}
+
+t_struct	*ft_aux_precision(t_struct *list)
+{
+	char	*nbr;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (list->set[i] != '.')
+		i++;
+	i++;
+	nbr = (char*)malloc(sizeof(char));
+	while (ft_isdigit(list->set[i]))
 	{
-		while (list->set[i] != '\0')
-		{
-			if (list->set[i] == '.' || ft_isdigit(list->set[i]) == 1)
-				break ;
-			i++;
-		}
-		if (list->set[i] == '0')
-		{
-			list->zero = list->set[i];
-			i++;
-		}
-		nbr = (char*)malloc(sizeof(char));
-		while (ft_isdigit(list->set[i]))
-		{
-			nbr[j] = list->set[i];
-			i++;
-			j++;
-		}
-		if (nbr)
-			list->width = (long int)ft_atoi(nbr);
-		free(nbr);
+		nbr[j] = list->set[i];
+		i++;
+		j++;
 	}
+	if (nbr == NULL)
+		list->precision = 0;
+	else
+		list->precision = (long int)ft_atoi(nbr);
+	free(nbr);
 	return (list);
 }
 
 t_struct	*ft_precision(t_struct *list)
 {
-	int			i;
-	int			j;
-	char		*nbr;
-
-	i = 0;
-	j = 0;
 	if (list->asterisk_precision)
 		list->precision = list->asterisk_precision;
 	else
-	{
-		while (list->set[i] != '.')
-			i++;
-		i++;
-		nbr = (char*)malloc(sizeof(char));
-		while (ft_isdigit(list->set[i]))
-		{
-			nbr[j] = list->set[i];
-			i++;
-			j++;
-		}
-		if (nbr == NULL)
-			list->precision = 0;
-		else
-			list->precision = (long int)ft_atoi(nbr);
-		free(nbr);
-	}
+		ft_aux_precision(list);
 	return (list);
 }
 
@@ -300,7 +404,7 @@ t_struct	*ft_asterisk(t_struct *list)
 	return (list);
 }
 
-void		ft_start(t_struct *list)
+t_struct	*ft_start(t_struct *list)
 {
 	if (ft_iscontained('*', list->set))
 		ft_asterisk(list);
@@ -308,6 +412,7 @@ void		ft_start(t_struct *list)
 		ft_precision(list);
 	ft_width(list);
 	ft_conversion(list);
+	return (list);
 }
 
 t_struct	*update_set(t_struct *list)
@@ -384,7 +489,10 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	ft_printf("son %7.4s cosas", "12345");
+	int		i = 30;
+	void	*ptr = &i;
+
+	ft_printf("son %12X cosas", 30);
 	//getchar();
 	return (0);
 }

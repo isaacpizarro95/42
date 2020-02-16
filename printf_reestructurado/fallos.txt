@@ -1,3 +1,4 @@
 - En la conversión 's' falla la precisión cuando es = 0.
-- Dividir funciones de más de 25 líneas.
 - Arreglar el tema del signo (no se escribe bien cuando se ponen ceros ya sea por el ancho o por la precisión).
+- La conversión 'p' no funciona.
+- Revisar memory leaks.
