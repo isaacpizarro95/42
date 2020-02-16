@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:38:33 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/16 04:57:18 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/16 15:11:38 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_struct	*ft_spaces(t_struct *list)
 	long int i;
 
 	i = (long int)ft_strlen(list->str);
-	while (i <= list->width)
+	while (i < list->width)
 	{
 		ft_putchar(' ');
 		i++;
@@ -46,7 +46,7 @@ t_struct	*ft_hyphen(t_struct *list)
 
 	i = (long int)ft_strlen(list->str);
 	ft_putstr(list->str);
-	while (i <= list->width)
+	while (i < list->width)
 	{
 		ft_putchar(' ');
 		i++;
@@ -66,33 +66,43 @@ t_struct	*ft_put_witdh(t_struct *list)
 	return (list);
 }
 
+t_struct	*ft_aux_precision_integers(long int i, t_struct *list)
+{
+	char		*str;
+	long int	j;
+	long int	k;
+
+	j = 0;
+	k = 0;
+	str = (char*)malloc(sizeof(char));
+	while (i < list->precision)
+	{
+		str[j] = '0';
+		j++;
+		i++;
+	}
+	while (list->str[k] != '\0')
+	{
+		str[j] = list->str[k];
+		j++;
+		k++;
+	}
+	str[j] = '\0';
+	list->str = str;
+	ft_put_witdh(list);
+	return (list);
+}
+
 t_struct	*ft_put_precision_integers(t_struct *list)
 {
 	long int	i;
 	long int	j;
-	long int	k;
-	char		*str;
 
+	list->zero = '\0';
 	i = (long int)ft_strlen(list->str);
 	j = 0;
-	k = 0;
 	if (list->width > list->precision)
-	{
-		while (j < list->width - i)
-		{
-			str[j] = '0';
-			j++;
-		}
-		while (j < list->width)
-		{
-			str[j] = list->str[k];
-			j++;
-			k++;
-		}
-		list->str = str;
-		ft_put_witdh(list);
-		list->len += list->width;
-	}
+		ft_aux_precision_integers(i, list);
 	else
 	{
 		while (j < list->precision - i)
@@ -106,27 +116,22 @@ t_struct	*ft_put_precision_integers(t_struct *list)
 	return (list);
 }
 
-char		*ft_put_precision_chars(t_struct *list)
+char		*ft_put_precision_chars(char *new_str, t_struct *list)
 {
 	long int	i;
-	char		*temp;
+	long int	j;
 
-	i = 0;
+	i = (long int)ft_strlen(list->str);
+	j = 0;
 	if (list->precision < (long int)ft_strlen(list->str))
 	{
-		if (list->precision == 0)
-			list->str = NULL;
-		else
+		while (j < list->precision)
 		{
-			while (i < list->precision)
-			{
-				temp[i] = list->str[i];
-				i++;
-			}
-			return (temp);
+			new_str[j] = list->str[j];
+			j++;
 		}
 	}
-	return (list->str);
+	return (new_str);
 }
 
 t_struct	*ft_d_conversion(t_struct *list)
@@ -146,16 +151,30 @@ t_struct	*ft_d_conversion(t_struct *list)
 
 t_struct	*ft_s_conversion(t_struct *list)
 {
+	char	*new_str;
+
 	list->zero = '\0';
 	list->str = va_arg(list->args, char*);
-	if (ft_iscontained('.', list->set))
-		list->str = ft_put_precision_chars(list);
+	if (list->precision < (long int)ft_strlen(list->str))
+	{
+		if (list->precision == 0)
+			list->str = NULL;
+		else
+		{
+			new_str = (char*)malloc(sizeof(char));
+			list->str = ft_put_precision_chars(new_str, list);
+			free(new_str);
+		}
+	}
 	if (list->width > (long int)ft_strlen(list->str))
 		ft_put_witdh(list);
 	else
 	{
-		ft_putstr(list->str);
-		list->len += ft_strlen(list->str);
+		if (list->str)
+		{
+			ft_putstr(list->str);
+			list->len += ft_strlen(list->str);
+		}
 	}
 	return (list);
 }
@@ -183,7 +202,7 @@ t_struct	*ft_conversion(t_struct *list)
 		ft_s_conversion(list);
 	if (list->conversion == 'd' || list->conversion == 'i')
 		ft_d_conversion(list);
-	free(list->str);
+	//free(list->str);
 	return (list);
 }
 
@@ -365,7 +384,7 @@ int			ft_printf(const char *format, ...)
 
 int			main(void)
 {
-	ft_printf("son %s cosas", 12345);
+	ft_printf("son %7.4s cosas", "12345");
 	//getchar();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:39:05 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/16 04:57:38 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/16 14:35:48 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,13 @@ void		ft_start(t_struct *list);
 t_struct	*ft_precision(t_struct *list);
 t_struct	*ft_asterisk(t_struct *list);
 t_struct	*ft_width(t_struct *list);
-char		*get_number(t_struct *list, int i, char *nbr);
-char		*ft_put_precision_chars(t_struct *list);
+char		*ft_put_precision_chars(char *new_str, t_struct *list);
 t_struct	*ft_put_precision_integers(t_struct *list);
+t_struct	*ft_aux_precision_integers(long int i, t_struct *list);
 t_struct	*ft_put_witdh(t_struct *list);
 t_struct	*ft_hyphen(t_struct *list);
 t_struct	*ft_spaces(t_struct *list);
 t_struct	*ft_zeros(t_struct *list);
-char		*ft_sign(char *str, char *new_str, t_struct *list);
 t_struct	*ft_conversion(t_struct *list);
 t_struct	*ft_c_conversion(t_struct *list);
 t_struct	*ft_s_conversion(t_struct *list);

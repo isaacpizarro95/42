@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 04:50:20 by isaacpizarr       #+#    #+#             */
-/*   Updated: 2020/02/16 04:57:32 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/16 14:46:14 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int     main(void)
 {
-    printf("son %08c cosas\n", '2');
+    printf("son %7.2s cosas\n", "12345");
     return (0);
 }
