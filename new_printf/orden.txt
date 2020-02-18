@@ -12,4 +12,4 @@ Para compilar:
 
 gcc main.c ft_printf.c ft_zeros.c ft_widht.c ft_precision.c ft_hyphen.c ft_d_conversion.c ft_conversion.c ft_chars_conversion.c ft_asterisk.c libft/ft_atoi.c libft/ft_isalpha.c libft/ft_iscontained.c libft/ft_isdigit.c libft/ft_putchar.c libft/ft_putstr.c libft/ft_strlen.c libft/ft_isspace.c libft/ft_itoa.c libft/ft_calloc.c libft/ft_memset.c libft/ft_nbrlen.c && ./a.out
 
-gcc todo.c libft/ft_atoi.c libft/ft_isalpha.c libft/ft_iscontained.c libft/ft_isdigit.c libft/ft_putchar.c libft/ft_putstr.c libft/ft_strlen.c libft/ft_isspace.c libft/ft_itoa.c libft/ft_calloc.c libft/ft_memset.c libft/ft_nbrlen.c && ./a.out
+gcc new_todo.c libft/ft_atoi.c libft/ft_isalpha.c libft/ft_iscontained.c libft/ft_isdigit.c libft/ft_putchar.c libft/ft_putstr.c libft/ft_strlen.c libft/ft_isspace.c libft/ft_itoa.c libft/ft_calloc.c libft/ft_memset.c libft/ft_nbrlen.c && ./a.out

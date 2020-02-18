@@ -1,0 +1,10 @@
+Flags para cada conversión:
+
+c: -, ancho, *.
+
+s: -, ancho, precisión(.) para chars, *.
+
+d, i: -, ancho, precisión(.) para ints, *, 0.
+    precision > - > 0 > ancho
+
+p: -, ancho, *.
