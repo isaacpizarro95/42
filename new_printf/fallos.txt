@@ -1,2 +1,0 @@
-- En la conversión 's' falla la precisión cuando es = 0.
-- Revisar memory leaks.

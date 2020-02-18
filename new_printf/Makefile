@@ -1,45 +1,45 @@
-.PHONY = all clean
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/02/18 20:49:40 by ipizarro          #+#    #+#              #
+#    Updated: 2020/02/18 21:15:34 by ipizarro         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra
-NAME = libft.a
+SRC             = new_todo.c
+SRC_LIB_PATH    = ./libft/
+SRC_LIB_NAME    = ft_strnew.c ft_memset.c ft_iscontained.c ft_strdup.c \
+					ft_strlen.c ft_strjoin.c ft_putchar_fd.c ft_strncpy.c \
+					ft_rev_str.c ft_atoi.c ft_isspace.c
+SRC_LIB         = $(addprefix $(SRC_LIB_PATH), $(SRC_LIB_NAME))
+OBJ             = $(SRC:.c=.o)
+OBJ_LIB         = $(SRC_LIB:.c=.o)
+CFLAGS          = -Wall -Wextra -Werror
+#CFLAGS			= -g
+CC              = gcc
+INCLUDES        = ./
+INCLUDES_LIB    = ./libft
+NAME            = libftprintf.a
 
-SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
-	ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memccpy.c \
-	ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
-	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-	ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcat.c \
-	ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
-	ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
-
-SRCBONUS = ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c \
-	ft_lstclear_bonus.c ft_lstdelone_bonus.c ft_lstiter_bonus.c \
-	ft_lstlast_bonus.c ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
-
-INCLUDE = libft.h
-
-OBJ = $(SRC:.c=.o)
-OBJBONUS = $(SRCBONUS:.c=.o)
-
-all:	$(NAME)
-
-$(NAME):	$(OBJ)
-	ar rc $@ $^
+all: $(NAME)
+$(NAME):   $(OBJ) $(OBJ_LIB)
+	cd $(SRC_LIB_PATH) && $(MAKE)
+	ar rc $(NAME) $(OBJ) $(OBJ_LIB)
 	ranlib $(NAME)
-
-%.o:%.c $(INCLUDE)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-bonus:	$(OBJBONUS) $(OBJ)
-	ar rc $(NAME) $^
-	ranlib $(NAME)
-
+#	$(CC) $(CFLAGS) -o a.out $(OBJ) libft/libft.a
+%.o: %.c
+	$(CC) -c $(CFLAGS) -o $@ $< -I $(INCLUDES)
+%.o: $(SRC_LIB_PATH)/%.c
+	$(CC) -c $(CFLAGS) -o $@ $< -I $(INCLUDES_LIB)
 clean:
 	rm -f *.o
-
-fclean:	clean
+	rm -f $(SRC_LIB_PATH)*.o
+fclean: clean
 	rm -f $(NAME)
-
-re:	fclean all
-
-rebonus: fclean bonus
+	rm -f $(SRC_LIB_PATH)libft.a
+re:         fclean all
+.PHONY:     clean fclean

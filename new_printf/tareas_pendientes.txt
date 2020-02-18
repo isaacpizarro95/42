@@ -1,0 +1,5 @@
+- Revisar memory leaks.
+- Cuando widht > precision > ft_strlen(list->str) no funciona con números grandes.
+- Dividir las funciones en diferentes ficheros.
+- Hacer el Makefile.
+- Pasar los tests.
