@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_todo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:38:33 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/18 21:18:18 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/19 03:22:51 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ t_struct	*ft_sign(t_struct *list)
 	return(list);
 }
 
-t_struct	*ft_zeros(t_struct *list)
+t_struct	*ft_zeros(t_struct *list, long int size)
 {
 	long int i;
-
+	
 	i = (long int)ft_strlen(list->str);
 	ft_sign(list);
-	while (i < list->width)
+	while (i < size)
 	{
 		ft_putchar('0');
 		i++;
@@ -119,12 +119,15 @@ t_struct	*ft_hyphen(t_struct *list)
 
 t_struct	*ft_put_witdh(t_struct *list)
 {
+	long int	i;
+
+	i = (long int)ft_strlen(list->str);
 	if (list->neg == 1)
 		list->width--;
 	if (ft_iscontained('-', list->set))
 		ft_hyphen(list);
 	else if (list->zero == '0' && !(ft_iscontained('.', list->set)))
-		ft_zeros(list);
+		ft_zeros(list, list->width);
 	else
 		ft_spaces(list);
 	list->len += list->width;
@@ -133,30 +136,28 @@ t_struct	*ft_put_witdh(t_struct *list)
 
 t_struct	*ft_aux_put_precision_integers(long int i, t_struct *list)
 {
-	char		*new_str;
-	long int	j;
-	long int	k;
+	int j;
 
 	j = 0;
-	k = 0;
-	new_str = (char*)malloc(sizeof(char) * 20);
-	while (i < list->precision)
+	if (ft_iscontained('-', list->set))
 	{
-		new_str[j] = '0';
-		j++;
-		i++;
+		ft_zeros(list, list->precision);
+		while (i < list->width)
+		{
+			ft_putchar(' ');
+			i++;
+		}
 	}
-	while (list->str[k])
+	else
 	{
-		new_str[j] = list->str[k];
-		j++;
-		k++;
- 	}
-	new_str[j] = '\0';
-	//free(list->str);
-	list->str = new_str;
-	free(new_str);
-	ft_put_witdh(list);
+		while (j < list->width - list->precision)
+		{
+			ft_putchar(' ');
+			j++;
+		}
+		ft_zeros(list, list->precision);
+	}
+	list->len += list->width;
 	return (list);
 }
 
@@ -220,6 +221,20 @@ t_struct	*ft_p_conversion(t_struct *list)
 	return (list);
 }
 
+t_struct	*ft_aux_int_conversion(t_struct *list)
+{
+	int j;
+
+	j = va_arg(list->args, long int);
+	if (j < 0)
+	{
+		list->neg = 1;
+		j = j * -1;
+	}
+	list->str = ft_itoa(j);
+	return(list);
+}
+
 t_struct	*ft_int_conversion(t_struct *list)
 {
 	unsigned long int	i;
@@ -233,15 +248,7 @@ t_struct	*ft_int_conversion(t_struct *list)
 		ft_base_hexadecimal(i, list);
 	}
 	else
-	{
-		j = va_arg(list->args, long int);
-		if (j < 0)
-		{
-			list->neg = 1;
-			j = j * -1;
-		}
-		list->str = ft_itoa(j);
-	}
+		ft_aux_int_conversion(list);
 	if (list->precision > (long int)ft_strlen(list->str))
 		ft_put_precision_integers(list);
 	else if (list->width > (long int)ft_strlen(list->str))
@@ -282,15 +289,44 @@ t_struct	*ft_s_conversion(t_struct *list)
 	return (list);
 }
 
-t_struct	*ft_c_conversion(t_struct *list)
+t_struct	*ft_aux_c_conversion(t_struct *list, char c)
 {
-	list->zero = '\0';
-	*list->str = va_arg(list->args, int);
-	if (list->width > 1)
-		ft_put_witdh(list);
+	int i;
+
+	i = 1;
+	if (ft_iscontained('-', list->set))
+	{
+		ft_putchar(c);
+		while (i < list->width)
+		{
+			ft_putchar(' ');
+			i++;
+		}
+	}
 	else
 	{
-		ft_putstr(list->str);
+		while (i < list->width)
+		{
+			ft_putchar(' ');
+			i++;
+		}
+		ft_putchar(c);
+	}
+	list->len += list->width;
+	return(list);
+}
+
+t_struct	*ft_c_conversion(t_struct *list)
+{
+	char c;
+
+	list->zero = '\0';
+	c = va_arg(list->args, int);
+	if (list->width > 1)
+		ft_aux_c_conversion(list, c);
+	else
+	{
+		ft_putchar(c);
 		list->len++;
 	}
 	return (list);
@@ -298,20 +334,15 @@ t_struct	*ft_c_conversion(t_struct *list)
 
 t_struct	*ft_conversion(t_struct *list)
 {
-	list->str = (char*)malloc(sizeof(char));
 	if (list->conversion == 'c')
 		ft_c_conversion(list);
 	else if (list->conversion == 's')
 		ft_s_conversion(list);
-	else if (list->conversion == 'd' || list->conversion == 'i')
-		ft_int_conversion(list);
-	else if (list->conversion == 'u')
-		ft_int_conversion(list);
-	else if (list->conversion == 'x' || list->conversion == 'X')
+	else if (list->conversion == 'd' || list->conversion == 'i' || 
+	list->conversion == 'u' || list->conversion == 'x' || list->conversion == 'X')
 		ft_int_conversion(list);
 	else if (list->conversion == 'p')
 		ft_p_conversion(list);
-	//free(list->str);
 	return (list);
 }
 
@@ -506,7 +537,7 @@ int			main(void)
 	unsigned long int	i = 30;
 	void	*ptr = &i;
 
-	ft_printf("son %12.7x cosas", 30);
+	ft_printf("son %10.8d %s", 30, "cosas");
 	//getchar();
 	return (0);
 }

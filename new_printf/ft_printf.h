@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:39:05 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/18 17:57:50 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/19 03:23:00 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ t_struct	*ft_aux_put_precision_integers(long int i, t_struct *list);
 t_struct	*ft_put_witdh(t_struct *list);
 t_struct	*ft_hyphen(t_struct *list);
 t_struct	*ft_spaces(t_struct *list);
-t_struct	*ft_zeros(t_struct *list);
+t_struct	*ft_zeros(t_struct *list, long int size);
 t_struct	*ft_sign(t_struct *list);
 t_struct	*ft_base_hexadecimal(unsigned long int k, t_struct *list);
 char		*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list);
 t_struct	*ft_conversion(t_struct *list);
 t_struct	*ft_c_conversion(t_struct *list);
+t_struct	*ft_aux_c_conversion(t_struct *list, char c);
 t_struct	*ft_s_conversion(t_struct *list);
 t_struct	*ft_int_conversion(t_struct *list);
 t_struct	*ft_p_conversion(t_struct *list);
