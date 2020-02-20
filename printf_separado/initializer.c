@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:57:50 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 17:42:20 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:06:49 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,15 @@ t_struct	*ft_start(t_struct *list)
 	return (list);
 }
 
-/**
 t_struct	*update_set(t_struct *list)
 {
 	int j;
 
 	j = 0;
-	while (ft_isalpha(list->format[list->i]) == 0)
-	{
-		list->i++;
+	while (ft_isalpha(list->format[list->i + j]) == 0)
 		j++;
-	}
-	list->set = ft_substr(list->format, list->i - j, j);
-	list->i++;
-	list->conversion = list->format[list->i];
-	list->i++;
-	return (list);
-}
-**/
-
-t_struct	*update_set(t_struct *list)
-{
-	int j;
-
-	j = 0;
-	while (ft_isalpha(list->format[list->i]) == 0)
-	{
-		list->set[j] = list->format[list->i];
-		list->i++;
-		j++;
-	}
+	list->set = ft_substr(list->format, list->i, j);
+	list->i = list->i + j;
 	list->conversion = list->format[list->i];
 	list->i++;
 	return (list);
@@ -61,7 +40,6 @@ t_struct	*update_set(t_struct *list)
 t_struct	*list_reinitialize(t_struct *list)
 {
 	list->i++;
-	list->set = (char*)malloc(sizeof(char));
 	list->str = NULL;
 	list->conversion = '\0';
 	list->neg = 0;
@@ -72,8 +50,6 @@ t_struct	*list_reinitialize(t_struct *list)
 	list->zero = '\0';
 	update_set(list);
 	ft_start(list);
-	free(list->set);
-	list->set = NULL;
 	return (list);
 }
 

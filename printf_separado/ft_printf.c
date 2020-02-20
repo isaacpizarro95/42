@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:56:21 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 17:42:26 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:06:46 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int			main(void)
 
 	i = 30;
 	ptr = &i;
-	ft_printf("son %s %d cosas", "tantas", 12345);
+	ft_printf("son %-10.7d cosas", 30);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:42:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 17:27:31 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:10:01 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_struct	*update_set(t_struct *list);
 t_struct	*ft_start(t_struct *list);
 t_struct	*ft_asterisk(t_struct *list);
 t_struct	*ft_put_precision_integers(t_struct *list);
-t_struct	*ft_aux_put_precision_integers(long int i, t_struct *list);
+t_struct	*ft_aux_put_precision_integers(t_struct *list);
 t_struct	*ft_precision(t_struct *list);
 t_struct	*ft_put_witdh(t_struct *list);
 t_struct	*ft_width(t_struct *list);

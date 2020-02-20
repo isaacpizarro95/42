@@ -6,13 +6,13 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:02:29 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 17:27:40 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:09:46 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_struct	*ft_aux_put_precision_integers(long int i, t_struct *list)
+t_struct	*ft_aux_put_precision_integers(t_struct *list)
 {
 	int j;
 
@@ -20,10 +20,10 @@ t_struct	*ft_aux_put_precision_integers(long int i, t_struct *list)
 	if (ft_iscontained('-', list->set))
 	{
 		ft_zeros(list, list->precision);
-		while (i < list->width)
+		while (j < list->width - list->precision)
 		{
 			ft_putchar(' ');
-			i++;
+			j++;
 		}
 	}
 	else
@@ -48,7 +48,7 @@ t_struct	*ft_put_precision_integers(t_struct *list)
 	i = (long int)ft_strlen(list->str);
 	j = 0;
 	if (list->width > list->precision)
-		ft_aux_put_precision_integers(i, list);
+		ft_aux_put_precision_integers(list);
 	else
 	{
 		ft_sign(list);
