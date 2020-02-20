@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   width.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:01:10 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/19 19:04:40 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 02:37:23 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_struct	*ft_width(t_struct *list)
 				break ;
 			i++;
 		}
-		list->width = get_number(list);
+		list->width = get_number(i, list);
 	}
 	return (list);
 }

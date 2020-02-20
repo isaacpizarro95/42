@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   int_conversion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:09:13 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/19 18:22:17 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 02:37:11 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

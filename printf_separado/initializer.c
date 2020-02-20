@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:57:50 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/19 19:29:32 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 03:24:59 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_struct	*update_set(t_struct *list)
 
 t_struct	*list_reinitialize(t_struct *list)
 {
+	list->i++;
+	list->set = (char*)malloc(sizeof(char));
 	list->str = NULL;
 	list->conversion = '\0';
 	list->neg = 0;
@@ -49,6 +51,10 @@ t_struct	*list_reinitialize(t_struct *list)
 	list->asterisk_precision = 0;
 	list->asterisk_width = 0;
 	list->zero = '\0';
+	update_set(list);
+	ft_start(list);
+	free(list->set);
+	list->set = NULL;
 	return (list);
 }
 
@@ -56,7 +62,6 @@ t_struct	*real_parser(t_struct *list)
 {
 	while (list->format[list->i] != '\0')
 	{
-		list_reinitialize(list);
 		if (list->format[list->i] == '%')
 		{
 			if (list->format[list->i + 1] == '%')
@@ -66,13 +71,7 @@ t_struct	*real_parser(t_struct *list)
 				list->len++;
 			}
 			else
-			{
-				list->i++;
-				list->set = (char*)malloc(sizeof(char));
-				update_set(list);
-				ft_start(list);
-				free(list->set);
-			}
+				list_reinitialize(list);
 		}
 		ft_putchar(list->format[list->i]);
 		list->i++;

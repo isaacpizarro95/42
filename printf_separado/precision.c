@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   precision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:02:29 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/19 19:14:05 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 03:22:53 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ char		*ft_put_precision_chars(t_struct *list)
 			j++;
 		}
 	}
+	str[j] = '\0';
 	new_str = str;
 	free(str);
+	str = NULL;
 	return (new_str);
 }
 
@@ -98,7 +100,7 @@ t_struct	*ft_precision(t_struct *list)
 		while (list->set[i] != '.')
 			i++;
 		i++;
-		list->precision = get_number(list);
+		list->precision = get_number(i, list);
 	}
 	return (list);
 }

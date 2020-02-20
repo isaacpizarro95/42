@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:42:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/19 19:12:38 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 02:36:29 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_struct	*ft_hyphen(t_struct *list);
 t_struct	*ft_spaces(t_struct *list);
 t_struct	*ft_zeros(t_struct *list, long int size);
 t_struct	*ft_sign(t_struct *list);
-long int	get_number(t_struct *list);
+long int	get_number(int i, t_struct *list);
 t_struct	*ft_base_hexadecimal(unsigned long int k, t_struct *list);
 char		*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list);
 t_struct	*ft_conversion(t_struct *list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   char_conversion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:08:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/19 19:15:13 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 03:23:37 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

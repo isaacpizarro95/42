@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 17:56:21 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 03:23:28 by isaacpizarr      ###   ########.fr       */
+/*   Created: 2020/02/20 02:45:39 by isaacpizarr       #+#    #+#             */
+/*   Updated: 2020/02/20 02:46:24 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int			ft_printf(const char *format, ...)
-{
-	t_struct	*list;
-	int			len_outpt;
-
-	if (!(list = (t_struct*)malloc(sizeof(t_struct))))
-		return (-1);
-	list->format = format;
-	va_start(list->args, format);
-	len_outpt = parser(list);
-	va_end(list->args);
-	free(list);
-	printf("\n%d\n", len_outpt);
-	return (len_outpt);
-}
+#include <stdio.h>
 
 int			main(void)
 {
@@ -35,6 +19,6 @@ int			main(void)
 
 	i = 30;
 	ptr = &i;
-	ft_printf("son %8.7s %d cosas", "tantas", 12345);
+	printf("son %-10.*s cosas", 1, "tan");
 	return (0);
 }
