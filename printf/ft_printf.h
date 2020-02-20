@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:42:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 18:10:01 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/20 18:38:18 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 #include <stdarg.h>
 #include <ctype.h>
-#include "libft/libft.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 
 typedef struct	s_struct
 {
@@ -58,5 +60,19 @@ t_struct	*ft_s_conversion(t_struct *list);
 t_struct	*ft_int_conversion(t_struct *list);
 t_struct	*ft_p_conversion(t_struct *list);
 t_struct	*list_reinitialize(t_struct *list);
+int			ft_atoi(const char *str);
+void		*ft_calloc(size_t count, size_t size);
+int			ft_isalpha(int c);
+int			ft_iscontained(char c, const char *set);
+int			ft_isdigit(int c);
+int			ft_isspace(int c);
+char		*ft_itoa(int n);
+void		*ft_memset(void *b, int c, size_t len);
+size_t		ft_nbrlen(long int nbr);
+void		ft_putchar(char c);
+void		ft_putstr(char *s);
+char		*ft_strdup(const char *s);
+size_t		ft_strlen(const char *str);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
