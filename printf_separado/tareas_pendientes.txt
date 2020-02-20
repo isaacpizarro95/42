@@ -1,5 +1,0 @@
-- Revisar memory leaks.
-- Poder usar mas de un % y que no se mantengan los valores de los flags de set a set.
-- Dividir las funciones en diferentes ficheros.
-- Hacer el Makefile.
-- Pasar los tests.
