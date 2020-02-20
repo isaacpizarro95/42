@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:57:50 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 03:24:59 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/20 17:42:20 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,25 @@ t_struct	*ft_start(t_struct *list)
 	ft_conversion(list);
 	return (list);
 }
+
+/**
+t_struct	*update_set(t_struct *list)
+{
+	int j;
+
+	j = 0;
+	while (ft_isalpha(list->format[list->i]) == 0)
+	{
+		list->i++;
+		j++;
+	}
+	list->set = ft_substr(list->format, list->i - j, j);
+	list->i++;
+	list->conversion = list->format[list->i];
+	list->i++;
+	return (list);
+}
+**/
 
 t_struct	*update_set(t_struct *list)
 {

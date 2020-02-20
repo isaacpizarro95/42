@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:56:21 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 03:23:28 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/20 17:42:26 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int			main(void)
 
 	i = 30;
 	ptr = &i;
-	ft_printf("son %8.7s %d cosas", "tantas", 12345);
+	ft_printf("son %s %d cosas", "tantas", 12345);
 	return (0);
 }

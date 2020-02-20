@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:42:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 02:36:29 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/20 17:27:31 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_struct	*real_parser(t_struct *list);
 t_struct	*update_set(t_struct *list);
 t_struct	*ft_start(t_struct *list);
 t_struct	*ft_asterisk(t_struct *list);
-char		*ft_put_precision_chars(t_struct *list);
 t_struct	*ft_put_precision_integers(t_struct *list);
 t_struct	*ft_aux_put_precision_integers(long int i, t_struct *list);
 t_struct	*ft_precision(t_struct *list);
@@ -50,7 +49,6 @@ t_struct	*ft_hyphen(t_struct *list);
 t_struct	*ft_spaces(t_struct *list);
 t_struct	*ft_zeros(t_struct *list, long int size);
 t_struct	*ft_sign(t_struct *list);
-long int	get_number(int i, t_struct *list);
 t_struct	*ft_base_hexadecimal(unsigned long int k, t_struct *list);
 char		*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list);
 t_struct	*ft_conversion(t_struct *list);

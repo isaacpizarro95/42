@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:03:39 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 03:20:24 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/20 17:39:06 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,4 @@ t_struct	*ft_hyphen(t_struct *list)
 		i++;
 	}
 	return (list);
-}
-
-long int	get_number(int i, t_struct *list)
-{
-	int 		j;
-	char		*nbr;
-	long int	n;
-
-	j = 0;
-	nbr = (char*)malloc(sizeof(char) * ft_strlen(list->set));
-	while (ft_isdigit(list->set[i]))
-	{
-		nbr[j] = list->set[i];
-		i++;
-		j++;
-	}
-	nbr[j] = '\0';
-	n = (long int)ft_atoi(nbr);
-	free(nbr);
-	nbr = NULL;
-	return (n);
 }

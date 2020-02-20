@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   precision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:02:29 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 03:22:53 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/20 17:27:40 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,31 +63,6 @@ t_struct	*ft_put_precision_integers(t_struct *list)
 	return (list);
 }
 
-char		*ft_put_precision_chars(t_struct *list)
-{
-	long int	i;
-	long int	j;
-	char		*str;
-	char		*new_str;
-
-	i = (long int)ft_strlen(list->str);
-	j = 0;
-	str = (char*)malloc(sizeof(char) * i);
-	if (list->precision < i)
-	{
-		while (j < list->precision)
-		{
-			str[j] = list->str[j];
-			j++;
-		}
-	}
-	str[j] = '\0';
-	new_str = str;
-	free(str);
-	str = NULL;
-	return (new_str);
-}
-
 t_struct	*ft_precision(t_struct *list)
 {
 	int i;
@@ -100,7 +75,8 @@ t_struct	*ft_precision(t_struct *list)
 		while (list->set[i] != '.')
 			i++;
 		i++;
-		list->precision = get_number(i, list);
+		while (list->set[i] >= '0' && list->set[i] <= '9')
+			list->precision = (list->precision * 10) + (list->set[i++] - '0');
 	}
 	return (list);
 }

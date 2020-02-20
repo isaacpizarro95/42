@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   char_conversion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:08:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 03:23:37 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/20 17:41:14 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 t_struct	*ft_s_conversion(t_struct *list)
 {
-	char	*new_str;
-
 	list->zero = '\0';
 	list->str = va_arg(list->args, char*);
 	if (ft_iscontained('.', list->set) &&
@@ -24,7 +22,7 @@ t_struct	*ft_s_conversion(t_struct *list)
 		if (list->precision == 0)
 			list->str = "";
 		else
-			list->str = ft_put_precision_chars(list);
+			list->str = ft_substr(list->str, 0, list->precision);
 	}
 	if (list->width > (long int)ft_strlen(list->str))
 		ft_put_witdh(list);

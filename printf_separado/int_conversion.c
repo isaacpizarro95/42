@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   int_conversion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:09:13 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 02:37:11 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/20 17:42:12 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_struct	*ft_aux_int_conversion(t_struct *list)
 t_struct	*ft_int_conversion(t_struct *list)
 {
 	unsigned long int	i;
-	int					j;
 
 	if (list->conversion == 'u')
 		list->str = ft_itoa(va_arg(list->args, long unsigned int));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hexadecimal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:05:35 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 03:23:26 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/20 17:41:50 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char		*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list)
 
 t_struct	*ft_base_hexadecimal(unsigned long int k, t_struct *list)
 {
-	int		j;
+	size_t	j;
 	char	*str;
 	char	*aux;
 
