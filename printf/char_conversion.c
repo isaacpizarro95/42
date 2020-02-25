@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   char_conversion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:08:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 17:41:14 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/25 02:37:04 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,35 @@ t_struct	*ft_s_conversion(t_struct *list)
 {
 	list->zero = '\0';
 	list->str = va_arg(list->args, char*);
-	if (ft_iscontained('.', list->set) &&
-	list->precision < (long int)ft_strlen(list->str))
+	if (list->str)
 	{
-		if (list->precision == 0)
-			list->str = "";
+		if (ft_iscontained('.', list->set) &&
+		list->precision < (unsigned long int)ft_strlen(list->str))
+		{
+			if (list->precision == 0)	
+				list->str = "";
+			else
+				list->str = ft_substr(list->str, 0, list->precision);
+		}
+		if (list->width > (unsigned long int)ft_strlen(list->str))
+			ft_put_witdh(list);
 		else
-			list->str = ft_substr(list->str, 0, list->precision);
+		{
+			ft_putstr(list->str);
+			list->len += ft_strlen(list->str);
+		}
 	}
-	if (list->width > (long int)ft_strlen(list->str))
-		ft_put_witdh(list);
 	else
 	{
-		ft_putstr(list->str);
-		list->len += ft_strlen(list->str);
+		ft_putstr("(null)");
+		list->len += 6;
 	}
 	return (list);
 }
 
 t_struct	*ft_aux_c_conversion(t_struct *list, char c)
 {
-	int i;
+	unsigned long int i;
 
 	i = 1;
 	if (ft_iscontained('-', list->set))

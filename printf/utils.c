@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:03:39 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 17:39:06 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/25 00:41:21 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ t_struct	*ft_sign(t_struct *list)
 	return (list);
 }
 
-t_struct	*ft_zeros(t_struct *list, long int size)
+t_struct	*ft_zeros(t_struct *list, unsigned long int size)
 {
-	long int i;
+	unsigned long int i;
 
-	i = (long int)ft_strlen(list->str);
+	i = (unsigned long int)ft_strlen(list->str);
 	ft_sign(list);
 	while (i < size)
 	{
@@ -39,9 +39,9 @@ t_struct	*ft_zeros(t_struct *list, long int size)
 
 t_struct	*ft_spaces(t_struct *list)
 {
-	long int i;
+	unsigned long int i;
 
-	i = (long int)ft_strlen(list->str);
+	i = (unsigned long int)ft_strlen(list->str);
 	while (i < list->width)
 	{
 		ft_putchar(' ');
@@ -59,9 +59,9 @@ t_struct	*ft_spaces(t_struct *list)
 
 t_struct	*ft_hyphen(t_struct *list)
 {
-	long int i;
+	unsigned long int i;
 
-	i = (long int)ft_strlen(list->str);
+	i = (unsigned long int)ft_strlen(list->str);
 	if (list->conversion == 'p')
 	{
 		ft_putstr("0x");

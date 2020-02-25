@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   width.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:01:10 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 17:23:32 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/25 00:40:38 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 t_struct	*ft_put_witdh(t_struct *list)
 {
-	long int	i;
-
-	i = (long int)ft_strlen(list->str);
 	if (list->neg == 1)
 		list->width--;
 	if (ft_iscontained('-', list->set))

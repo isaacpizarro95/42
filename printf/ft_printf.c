@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:56:21 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 18:06:46 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/25 02:50:23 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@ int			ft_printf(const char *format, ...)
 	len_outpt = parser(list);
 	va_end(list->args);
 	free(list);
-	printf("\n%d\n", len_outpt);
+	//printf("\n%d\n", len_outpt);
 	return (len_outpt);
 }
-
+/**
 int			main(void)
 {
 	unsigned long int	i;
 	void				*ptr;
 
-	i = 30;
+	i = 0;
 	ptr = &i;
-	ft_printf("son %-10.7d cosas", 30);
+	ft_printf("%0p\n", ptr);
 	return (0);
 }
+**/

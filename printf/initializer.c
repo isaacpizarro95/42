@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:57:50 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 18:06:49 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/24 21:31:11 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,12 @@ t_struct	*real_parser(t_struct *list)
 			else
 				list_reinitialize(list);
 		}
-		ft_putchar(list->format[list->i]);
-		list->i++;
-		list->len++;
+		else
+		{
+			ft_putchar(list->format[list->i]);
+			list->i++;
+			list->len++;
+		}	
 	}
 	return (list);
 }

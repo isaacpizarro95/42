@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hexadecimal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:05:35 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 18:38:13 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/25 02:24:14 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   precision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:02:29 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 18:09:46 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/25 00:54:10 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_struct	*ft_aux_put_precision_integers(t_struct *list)
 {
-	int j;
+	unsigned long int j;
 
 	j = 0;
 	if (ft_iscontained('-', list->set))
@@ -41,11 +41,11 @@ t_struct	*ft_aux_put_precision_integers(t_struct *list)
 
 t_struct	*ft_put_precision_integers(t_struct *list)
 {
-	long int	i;
-	long int	j;
+	unsigned long int	i;
+	unsigned long int	j;
 
 	list->zero = '\0';
-	i = (long int)ft_strlen(list->str);
+	i = (unsigned long int)ft_strlen(list->str);
 	j = 0;
 	if (list->width > list->precision)
 		ft_aux_put_precision_integers(list);
