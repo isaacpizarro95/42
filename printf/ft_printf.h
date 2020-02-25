@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:42:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 02:23:22 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/25 20:52:39 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_struct	*ft_s_conversion(t_struct *list);
 t_struct	*ft_int_conversion(t_struct *list);
 t_struct	*ft_p_conversion(t_struct *list);
 t_struct	*list_reinitialize(t_struct *list);
+t_struct	*ft_aux_pointer(t_struct *list);
 int			ft_atoi(const char *str);
 void		*ft_calloc(size_t count, size_t size);
 int			ft_isalpha(int c);

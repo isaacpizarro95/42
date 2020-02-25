@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:57:50 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/24 21:31:11 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/25 20:39:38 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_struct	*update_set(t_struct *list)
 	int j;
 
 	j = 0;
-	while (ft_isalpha(list->format[list->i + j]) == 0)
+	while (ft_isalpha(list->format[list->i + j]) == 0 && list->format[list->i] != '%')
 		j++;
 	list->set = ft_substr(list->format, list->i, j);
 	list->i = list->i + j;

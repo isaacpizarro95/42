@@ -6,11 +6,18 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:03:39 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 00:41:21 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/25 21:29:57 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+t_struct	*ft_aux_pointer(t_struct *list)
+{
+	if (list->conversion == 'p')
+		ft_putstr("0x");
+	return (list);
+}
 
 t_struct	*ft_sign(t_struct *list)
 {
@@ -41,17 +48,16 @@ t_struct	*ft_spaces(t_struct *list)
 {
 	unsigned long int i;
 
-	i = (unsigned long int)ft_strlen(list->str);
+	if (list->conversion == 'p')
+		i = (unsigned long int)ft_strlen(list->str) + 2;
+	else
+		i = (unsigned long int)ft_strlen(list->str);
 	while (i < list->width)
 	{
 		ft_putchar(' ');
 		i++;
 	}
-	if (list->conversion == 'p')
-	{
-		ft_putstr("0x");
-		list->len += 2;
-	}
+	ft_aux_pointer(list);
 	ft_sign(list);
 	ft_putstr(list->str);
 	return (list);
@@ -61,12 +67,11 @@ t_struct	*ft_hyphen(t_struct *list)
 {
 	unsigned long int i;
 
-	i = (unsigned long int)ft_strlen(list->str);
 	if (list->conversion == 'p')
-	{
-		ft_putstr("0x");
-		list->len += 2;
-	}
+		i = (unsigned long int)ft_strlen(list->str) + 2;
+	else
+		i = (unsigned long int)ft_strlen(list->str);
+	ft_aux_pointer(list);
 	ft_sign(list);
 	ft_putstr(list->str);
 	while (i < list->width)

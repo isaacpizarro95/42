@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:02:29 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 00:54:10 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/25 20:56:59 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_struct	*ft_aux_put_precision_integers(t_struct *list)
 	unsigned long int j;
 
 	j = 0;
+	ft_aux_pointer(list);
 	if (ft_iscontained('-', list->set))
 	{
 		ft_zeros(list, list->precision);
@@ -52,6 +53,7 @@ t_struct	*ft_put_precision_integers(t_struct *list)
 	else
 	{
 		ft_sign(list);
+		ft_aux_pointer(list);
 		while (j < list->precision - i)
 		{
 			ft_putchar('0');

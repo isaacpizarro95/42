@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conversion.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:08:57 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/20 17:32:50 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/25 20:38:00 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,10 @@ t_struct	*ft_conversion(t_struct *list)
 		ft_int_conversion(list);
 	else if (list->conversion == 'p')
 		ft_p_conversion(list);
+	else if (list->conversion == '%')
+	{
+		*list->str = '%';
+		ft_put_witdh(list);
+	}
 	return (list);
 }

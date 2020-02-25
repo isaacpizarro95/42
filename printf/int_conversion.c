@@ -6,7 +6,7 @@
 /*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:09:13 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 02:27:58 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/25 21:42:37 by isaacpizarr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ t_struct	*ft_int_conversion(t_struct *list)
 	else if (list->conversion == 'x' || list->conversion == 'X')
 	{
 		i = va_arg(list->args, unsigned long int);
-		ft_base_hexadecimal(i, list);
+		if (i == 0)
+			list->str = "0";
+		else
+			ft_base_hexadecimal(i, list);
 	}
 	else
 		ft_aux_int_conversion(list);
