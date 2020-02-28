@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:56:21 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 20:57:07 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/28 19:41:12 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,23 @@ int			ft_printf(const char *format, ...)
 	va_start(list->args, format);
 	len_outpt = parser(list);
 	va_end(list->args);
+	list->format = NULL;
 	free(list);
-	//printf("\n%d\n", len_outpt);
+	//printf("La longitud es: %d\n", len_outpt);
 	return (len_outpt);
 }
-/**
+
 int			main(void)
 {
-	unsigned long int	i;
-	void				*ptr;
+	int		i;
+	void	*ptr;
 
 	i = 0;
 	ptr = &i;
-	ft_printf("%0p\n", ptr);
+	while (i < 5)
+	{
+		ft_printf("El número es: %i\n", i);
+		i++;
+	}
 	return (0);
 }
-**/

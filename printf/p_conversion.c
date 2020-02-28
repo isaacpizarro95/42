@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_conversion.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 18:09:35 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 21:40:31 by isaacpizarr      ###   ########.fr       */
+/*   Created: 2020/02/28 19:45:37 by ipizarro          #+#    #+#             */
+/*   Updated: 2020/02/28 19:45:40 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_struct	*ft_p_conversion(t_struct *list)
 		list->str = "";
 		if (list->width > ft_strlen(list->str))
 			ft_put_witdh(list);
-		else	
+		else
 		{
 			ft_aux_pointer(list);
 			list->len += 2;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unsigned_itoa.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/25 02:22:28 by isaacpizarr       #+#    #+#             */
-/*   Updated: 2020/02/25 02:24:57 by isaacpizarr      ###   ########.fr       */
+/*   Created: 2020/02/28 19:44:10 by ipizarro          #+#    #+#             */
+/*   Updated: 2020/02/28 19:44:14 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asterisk.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:58:47 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 00:46:56 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/28 19:31:30 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ t_struct	*ft_asterisk(t_struct *list)
 	while (list->set[i] != '.' && list->set[i] != '\0')
 	{
 		if (list->set[i] == '*')
-			list->asterisk_width = va_arg(list->args, unsigned long int);
-		if (list->asterisk_width < 0)
-			list->asterisk_width = 0;
+			list->asterisk_width = va_arg(list->args, long int);
 		i++;
 	}
 	i = 0;
@@ -33,9 +31,7 @@ t_struct	*ft_asterisk(t_struct *list)
 		while (list->set[i] != '\0')
 		{
 			if (list->set[i] == '*')
-				list->asterisk_precision = va_arg(list->args, unsigned long int);
-			if (list->asterisk_precision < 0)
-				list->asterisk_precision = 0;
+				list->asterisk_precision = va_arg(list->args, long int);
 			i++;
 		}
 	}

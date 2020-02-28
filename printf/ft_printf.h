@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:42:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 20:52:39 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/28 19:32:02 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char		*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list);
 t_struct	*ft_conversion(t_struct *list);
 t_struct	*ft_c_conversion(t_struct *list);
 t_struct	*ft_aux_c_conversion(t_struct *list, char c);
+t_struct	*ft_aux_percent_conversion(t_struct *list, char c);
 t_struct	*ft_s_conversion(t_struct *list);
 t_struct	*ft_int_conversion(t_struct *list);
 t_struct	*ft_p_conversion(t_struct *list);

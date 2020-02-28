@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isaacpizarro95 <isaacpizarro95@student.    +#+  +:+       +#+        */
+/*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:57:50 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/25 20:39:38 by isaacpizarr      ###   ########.fr       */
+/*   Updated: 2020/02/28 19:45:02 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ t_struct	*update_set(t_struct *list)
 	int j;
 
 	j = 0;
-	while (ft_isalpha(list->format[list->i + j]) == 0 && list->format[list->i] != '%')
+	while (ft_isalpha(list->format[list->i + j]) == 0
+	&& list->format[list->i + j] != '%'
+	&& list->format[list->i + j] != ' ' && list->format[list->i + j] != '\0')
 		j++;
 	list->set = ft_substr(list->format, list->i, j);
 	list->i = list->i + j;
-	list->conversion = list->format[list->i];
-	list->i++;
+	if (list->format[list->i] != '\0' && list->format[list->i] != ' ')
+	{
+		list->conversion = list->format[list->i];
+		list->i++;
+	}
 	return (list);
 }
 
@@ -73,7 +78,7 @@ t_struct	*real_parser(t_struct *list)
 			ft_putchar(list->format[list->i]);
 			list->i++;
 			list->len++;
-		}	
+		}
 	}
 	return (list);
 }
