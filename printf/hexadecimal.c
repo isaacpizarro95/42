@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 19:44:27 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/28 19:44:30 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/02/28 20:02:13 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char		*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list)
 		j++;
 	}
 	str[j] = hexadecimal[k];
+	hexadecimal = NULL;
 	return (str);
 }
 
