@@ -6,13 +6,13 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:57:50 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/03 18:35:21 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:36:09 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_struct	*ft_start(t_struct *list)
+void	ft_start(t_struct *list)
 {
 	if (ft_iscontained('*', list->set))
 		ft_asterisk(list);
@@ -20,10 +20,9 @@ t_struct	*ft_start(t_struct *list)
 		ft_precision(list);
 	ft_width(list);
 	ft_conversion(list);
-	return (list);
 }
 
-t_struct	*update_set(t_struct *list)
+void	update_set(t_struct *list)
 {
 	int j;
 
@@ -39,10 +38,9 @@ t_struct	*update_set(t_struct *list)
 		list->conversion = list->format[list->i];
 		list->i++;
 	}
-	return (list);
 }
 
-t_struct	*list_reinitialize(t_struct *list)
+void	list_reinitialize(t_struct *list)
 {
 	list->i++;
 	list->str = NULL;
@@ -52,13 +50,13 @@ t_struct	*list_reinitialize(t_struct *list)
 	list->width = 0;
 	list->asterisk_precision = 0;
 	list->asterisk_width = 0;
+	list->hyphen = 0;
 	list->zero = '\0';
 	update_set(list);
 	ft_start(list);
-	return (list);
 }
 
-t_struct	*real_parser(t_struct *list)
+void	real_parser(t_struct *list)
 {
 	while (list->format[list->i] != '\0')
 	{
@@ -80,10 +78,9 @@ t_struct	*real_parser(t_struct *list)
 			list->len++;
 		}
 	}
-	return (list);
 }
 
-int			parser(t_struct *list)
+int		parser(t_struct *list)
 {
 	if (!(ft_iscontained('%', list->format)))
 	{

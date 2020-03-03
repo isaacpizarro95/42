@@ -6,21 +6,21 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:02:29 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/28 17:42:41 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:53:34 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_struct	*ft_aux_put_precision_integers(t_struct *list)
+void	ft_aux_put_precision_integers(t_struct *list)
 {
-	unsigned long int j;
+	long int j;
 
 	j = 0;
 	ft_aux_pointer(list);
 	if (list->neg == 1)
 		list->width--;
-	if (ft_iscontained('-', list->set))
+	if (ft_iscontained('-', list->set) || list->hyphen == 1)
 	{
 		ft_zeros(list, list->precision);
 		while (j < list->width - list->precision)
@@ -39,16 +39,15 @@ t_struct	*ft_aux_put_precision_integers(t_struct *list)
 		ft_zeros(list, list->precision);
 	}
 	list->len += list->width;
-	return (list);
 }
 
-t_struct	*ft_put_precision_integers(t_struct *list)
+void	ft_put_precision_integers(t_struct *list)
 {
-	unsigned long int	i;
-	unsigned long int	j;
+	long int	i;
+	long int	j;
 
 	list->zero = '\0';
-	i = (unsigned long int)ft_strlen(list->str);
+	i = (long int)ft_strlen(list->str);
 	j = 0;
 	if (list->width > list->precision)
 		ft_aux_put_precision_integers(list);
@@ -64,10 +63,9 @@ t_struct	*ft_put_precision_integers(t_struct *list)
 		ft_putstr(list->str);
 		list->len += list->precision;
 	}
-	return (list);
 }
 
-t_struct	*ft_precision(t_struct *list)
+void	ft_precision(t_struct *list)
 {
 	int i;
 
@@ -82,5 +80,4 @@ t_struct	*ft_precision(t_struct *list)
 		while (list->set[i] >= '0' && list->set[i] <= '9')
 			list->precision = (list->precision * 10) + (list->set[i++] - '0');
 	}
-	return (list);
 }

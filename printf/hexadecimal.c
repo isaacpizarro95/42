@@ -6,13 +6,13 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 19:44:27 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/28 20:02:13 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/03 18:51:14 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list)
+char	*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list)
 {
 	unsigned long int	i;
 	int					j;
@@ -35,7 +35,7 @@ char		*ft_aux_hexadecimal(unsigned long int k, char *str, t_struct *list)
 	return (str);
 }
 
-t_struct	*ft_base_hexadecimal(unsigned long int k, t_struct *list)
+void	ft_base_hexadecimal(unsigned long int k, t_struct *list)
 {
 	size_t	j;
 	char	*str;
@@ -55,5 +55,4 @@ t_struct	*ft_base_hexadecimal(unsigned long int k, t_struct *list)
 	free(aux);
 	str = NULL;
 	aux = NULL;
-	return (list);
 }

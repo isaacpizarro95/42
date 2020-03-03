@@ -6,34 +6,32 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:03:39 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/02/28 17:36:39 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:46:17 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_struct	*ft_aux_pointer(t_struct *list)
+void	ft_aux_pointer(t_struct *list)
 {
 	if (list->conversion == 'p')
 		ft_putstr("0x");
-	return (list);
 }
 
-t_struct	*ft_sign(t_struct *list)
+void	ft_sign(t_struct *list)
 {
 	if (list->neg == 1)
 	{
 		ft_putchar('-');
 		list->len++;
 	}
-	return (list);
 }
 
-t_struct	*ft_zeros(t_struct *list, unsigned long int size)
+void	ft_zeros(t_struct *list, long int size)
 {
-	unsigned long int i;
+	long int i;
 
-	i = (unsigned long int)ft_strlen(list->str);
+	i = (long int)ft_strlen(list->str);
 	ft_sign(list);
 	while (i < size)
 	{
@@ -41,17 +39,16 @@ t_struct	*ft_zeros(t_struct *list, unsigned long int size)
 		i++;
 	}
 	ft_putstr(list->str);
-	return (list);
 }
 
-t_struct	*ft_spaces(t_struct *list)
+void	ft_spaces(t_struct *list)
 {
-	unsigned long int i;
+	long int i;
 
 	if (list->conversion == 'p')
-		i = (unsigned long int)ft_strlen(list->str) + 2;
+		i = (long int)ft_strlen(list->str) + 2;
 	else
-		i = (unsigned long int)ft_strlen(list->str);
+		i = (long int)ft_strlen(list->str);
 	while (i < list->width)
 	{
 		ft_putchar(' ');
@@ -60,17 +57,16 @@ t_struct	*ft_spaces(t_struct *list)
 	ft_aux_pointer(list);
 	ft_sign(list);
 	ft_putstr(list->str);
-	return (list);
 }
 
-t_struct	*ft_hyphen(t_struct *list)
+void	ft_hyphen(t_struct *list)
 {
-	unsigned long int i;
+	long int i;
 
 	if (list->conversion == 'p')
-		i = (unsigned long int)ft_strlen(list->str) + 2;
+		i = (long int)ft_strlen(list->str) + 2;
 	else
-		i = (unsigned long int)ft_strlen(list->str);
+		i = (long int)ft_strlen(list->str);
 	ft_aux_pointer(list);
 	ft_sign(list);
 	ft_putstr(list->str);
@@ -79,5 +75,4 @@ t_struct	*ft_hyphen(t_struct *list)
 		ft_putchar(' ');
 		i++;
 	}
-	return (list);
 }

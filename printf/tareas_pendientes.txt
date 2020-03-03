@@ -1,3 +1,0 @@
-- Revisar memory leaks.
-- Pasar norminette.
-- Corregir errores de los tests.
