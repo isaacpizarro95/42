@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:56:21 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/03 19:59:20 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/03 20:56:33 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,19 @@ int			ft_printf(const char *format, ...)
 	list->format = format;
 	va_start(list->args, format);
 	len_outpt = parser(list);
-	va_end(list->args);
 	list->format = NULL;
 	list->i = 0;
 	list->len = 0;
+	va_end(list->args);
 	free(list);
 	return (len_outpt);
 }
+
+/*
+int			main(void)
+{
+	ft_printf("El número es: ");
+	getchar();
+	return (0);
+}
+*/
