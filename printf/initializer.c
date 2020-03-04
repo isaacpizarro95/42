@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:57:50 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/03 20:35:39 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:32:38 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	list_reinitialize(t_struct *list)
 	list->zero = '\0';
 	update_set(list);
 	ft_start(list);
+	free(list->set);
 }
 
 void	real_parser(t_struct *list)

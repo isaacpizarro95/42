@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 19:44:27 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/03 20:14:58 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/04 18:34:21 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ void	ft_base_hexadecimal(unsigned long int k, t_struct *list)
 		aux[j] = str[ft_strlen(str) - 1 - j];
 		j++;
 	}
-	list->str = aux;
-	str = NULL;
-	aux = NULL;
 	free(str);
+	list->str = aux;
+	aux = NULL;
 	free(aux);
 }

@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 19:45:37 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/03 19:44:02 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:26:54 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,6 @@ void	ft_p_conversion(t_struct *list)
 	else
 		ft_base_hexadecimal(i, list);
 	ft_aux_p_conversion(list);
+	if (ft_strlen(list->str) > 0)
+		free(list->str);
 }
