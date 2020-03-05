@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 19:46:03 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/03 19:16:51 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/05 19:26:33 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	ft_put_witdh(t_struct *list)
 {
 	if (list->neg == 1)
 		list->width--;
+	if (list->conversion == 'p')
+		list->len -= 2;
 	if (ft_iscontained('-', list->set) || list->hyphen == 1)
 		ft_hyphen(list);
 	else if (list->zero == '0' && !(ft_iscontained('.', list->set)))

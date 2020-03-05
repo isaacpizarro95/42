@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:03:39 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/03 19:46:17 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/05 19:23:16 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	ft_aux_pointer(t_struct *list)
 {
 	if (list->conversion == 'p')
+	{
 		ft_putstr("0x");
+		list->len += 2;
+	}
 }
 
 void	ft_sign(t_struct *list)
@@ -31,8 +34,12 @@ void	ft_zeros(t_struct *list, long int size)
 {
 	long int i;
 
-	i = (long int)ft_strlen(list->str);
+	if (list->conversion == 'p')
+		i = (long int)ft_strlen(list->str) + 2;
+	else
+		i = (long int)ft_strlen(list->str);
 	ft_sign(list);
+	ft_aux_pointer(list);
 	while (i < size)
 	{
 		ft_putchar('0');

@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:42:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/04 18:44:19 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/05 19:31:13 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void				ft_asterisk_widht(t_struct *list);
 void				ft_asterisk_precision(t_struct *list);
 void				ft_put_precision_integers(t_struct *list);
 void				ft_aux_put_precision_integers(t_struct *list);
+void				ft_aux_aux_put_precision_integers(t_struct *list);
 void				ft_precision(t_struct *list);
 void				ft_put_witdh(t_struct *list);
 void				ft_width(t_struct *list);
@@ -66,8 +67,6 @@ void				ft_aux_s_conversion(t_struct *list);
 void				ft_int_conversion(t_struct *list);
 void				ft_aux_int_conversion(t_struct *list);
 void				ft_aux_d_conversion(t_struct *list);
-void				ft_aux_p_conversion(t_struct *list);
-void				ft_p_conversion(t_struct *list);
 void				list_reinitialize(t_struct *list);
 void				ft_aux_pointer(t_struct *list);
 int					ft_atoi(const char *str);
