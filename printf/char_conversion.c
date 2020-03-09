@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 18:08:02 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/04 18:45:02 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/09 10:57:54 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_s_conversion(t_struct *list)
 			list->str = ft_strdup("");
 		else
 			list->str = ft_substr(str, 0, list->precision);
-		str = NULL;
 		free(str);
 	}
 	ft_aux_s_conversion(list);
