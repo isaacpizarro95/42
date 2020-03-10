@@ -6,7 +6,7 @@
 /*   By: ipizarro <ipizarro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:56:21 by ipizarro          #+#    #+#             */
-/*   Updated: 2020/03/09 19:09:04 by ipizarro         ###   ########.fr       */
+/*   Updated: 2020/03/10 19:09:47 by ipizarro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			ft_printf(const char *format, ...)
 
 	if (!(list = malloc(sizeof(t_struct))))
 		return (-1);
-	list->format = ft_strdup(format);
+	list->format = format;
 	va_start(list->args, format);
 	len_outpt = parser(list);
 	list->format = NULL;
